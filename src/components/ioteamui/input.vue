@@ -1,14 +1,12 @@
 <template>
-  <div>
     <input type="text" v-model="inputValue" :style="inputStyle" @focus="focus" @blur="blur"></input>
-  </div>
 </template>
 <script>
   export default{
     data: function () {
       return {
         isfocus: false,
-        focusStyle:{
+        focusStyle: {
           'box-shadow': '2px 2px 2px 2px #888888'
         },
         defaultStyle: {
@@ -37,18 +35,21 @@
     },
     computed: {
       inputStyle(){
-        return this.isfocus?
-          lodash.extend(JSON.parse(JSON.stringify(this.defaultStyle)),JSON.parse(JSON.stringify(this.focusStyle)))
-          :JSON.parse(JSON.stringify(this.defaultStyle))
+        return this.isfocus ?
+          lodash.extend(JSON.parse(JSON.stringify(this.defaultStyle)), JSON.parse(JSON.stringify(this.focusStyle)))
+          : JSON.parse(JSON.stringify(this.defaultStyle))
       }
     },
     mounted(){
       this.inputValue = this.value ? this.value : '';
       this.defaultStyle = lodash.extend({},
         JSON.parse(JSON.stringify(this.defaultStyle)),
-        JSON.parse(JSON.stringify(this.iostyle||{})))
+        JSON.parse(JSON.stringify(this.iostyle || {})));
+      this.focusStyle = lodash.extend({},
+        JSON.parse(JSON.stringify(this.focusStyle)),
+        JSON.parse(JSON.stringify(this.ioFocusStyle || {})));
     },
-    props: ['value', 'iostyle'],
+    props: ['value', 'iostyle', 'ioFocusStyle'],
     methods: {
       focus: function () {
         this.isfocus = true;
