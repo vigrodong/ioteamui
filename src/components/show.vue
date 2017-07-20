@@ -1,10 +1,11 @@
 <template>
   <div>
     <io-input v-model="wzd"></io-input>
-
-    <ioRadio v-model="wzd" :ioValue="'1'"></ioRadio>
-    <ioRadio v-model="wzd" :ioValue="'2'"></ioRadio>
-
+    <br>
+    <ioRadio v-model="wzd" :ioValue="'1'" :ioStyle="{width:'20px',height:'20px'}">ssss</ioRadio>
+    <br>
+    <ioRadio v-model="wzd" :ioValue="'2'">点点滴滴</ioRadio>\<br>
+    <ioRadio v-model="wzd" :ioValue="'3'">纯纯粹粹</ioRadio>
   </div>
 
 </template>

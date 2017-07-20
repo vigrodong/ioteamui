@@ -1,5 +1,5 @@
 <template>
-    <input type="text" v-model="inputValue" :style="inputStyle" @focus="focus" @blur="blur"></input>
+  <input type="text" v-model="inputValue" :style="inputStyle" @focus="focus" @blur="blur"></input>
 </template>
 <script>
   export default{

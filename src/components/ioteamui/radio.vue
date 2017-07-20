@@ -1,11 +1,11 @@
 <template>
-  <label >
-    <input type="radio" v-model="radioValue" :value="ioValue" style="display:none" @click="doing">
+  <label>
+    <input type="radio" v-model="radioValue" :value="ioValue" style="display:none" @click="click" :name="radioName">
     <span :style="outside">
       <span :style="radioStyle"></span>
     </span>
+    <slot></slot>
   </label>
-
 </template>
 <script>
   export default{
@@ -14,40 +14,12 @@
         radioValue: '',
         defaultStyle: {
           'background-color': '#fff',
-          'border-radius': '100%',
-          display: 'inline-block',
-          height: '16px',
-          'margin-right': '10px',
-          'margin-top': '-1px',
-          'vertical-align': 'middle',
-          'width': '16px',
-          'line-height': '1'
-        },
-        outside:{
-          'line-height': '1',
-          'background-color': '#fff',
-          height: '18px',
-          padding: '2px',
-          width: '18px',
-          'border-radius': '100%',
-          display: 'inline-block',
-          border: '1px solid rgba(0,0,0,0.15)',
-          'vertical-align': 'middle',
-        },
-        checkedStyle: {
-          'margin-top': '-1px',
-          'line-height': '1',
-          'background-color': '#000',
-          content: ' ',
           height: '12px',
-          padding: '2px',
           width: '12px',
           'border-radius': '100%',
           display: 'inline-block',
-          border: '1px solid rgba(0,0,0,0.15)',
-          'vertical-align': 'middle',
-          'margin-right': '10px'
-        }
+          position: 'absolute',
+        },
       }
     },
     watch: {
@@ -66,17 +38,37 @@
         else {
           return this.defaultStyle
         }
+      },
+      radioName(){
+        return this.name === undefined ? 'radio' : this.name;
+      },
+      outside(){
+        return {
+          'width': this.defaultStyle.width,
+          'height': this.defaultStyle.height,
+          'border': '1px solid #84D8FC',
+          padding: '3px',
+          ...{
+            'border-radius': '100%',
+            display: 'inline-block',
+            'vertical-align': 'middle',
+            'position': 'relative'
+          }
+        }
+      },
+      checkedStyle(){
+        return {...this.defaultStyle, 'background-color': '#00CF00'}
       }
     },
     mounted(){
-      this.radioValue = this.value == this.ioValue ? this.value : '';
-      if (!this.ioStyle) {
-        this.defaultStyle = {...this.defaultStyle, ...this.ioStyle}
+      this.radioValue = (this.value == this.ioValue && this.value != '') ? this.value : '';
+      if (this.ioStyle) {
+        this.defaultStyle = {...this.defaultStyle, ...this.ioStyle};
       }
     },
-    props: ['ioValue', 'value', 'ioStyle'],
+    props: ['ioValue', 'value', 'ioStyle', 'name'],
     methods: {
-      doing: function () {
+      click: function () {
         this.radioValue = this.ioValue;
         this.$emit('input', this.radioValue);
       }
