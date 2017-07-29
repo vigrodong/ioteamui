@@ -13,9 +13,8 @@
       return {
         radioValue: '',
         defaultStyle: {
-          'background-color': '#fff',
-          height: '12px',
-          width: '12px',
+          height: this.ioSize + 'px',
+          width: this.ioSize + 'px',
           'border-radius': '100%',
           display: 'inline-block',
           position: 'absolute',
@@ -40,33 +39,51 @@
         }
       },
       radioName(){
-        return this.name === undefined ? 'radio' : this.name;
+        return this.name
       },
       outside(){
         return {
-          'width': this.defaultStyle.width,
-          'height': this.defaultStyle.height,
-          'border': '1px solid #84D8FC',
-          padding: '3px',
+          ...this.defaultStyle,
           ...{
-            'border-radius': '100%',
-            display: 'inline-block',
+            'position': 'relative',
             'vertical-align': 'middle',
-            'position': 'relative'
+            'border': '1px solid' + this.ioBorderColor,
+            padding: this.ioBorder + 'px',
           }
         }
       },
       checkedStyle(){
-        return {...this.defaultStyle, 'background-color': '#00CF00'}
+        return {...this.defaultStyle, 'background-color': this.ioCheckColor}
       }
     },
     mounted(){
       this.radioValue = (this.value == this.ioValue && this.value != '') ? this.value : '';
-      if (this.ioStyle) {
-        this.defaultStyle = {...this.defaultStyle, ...this.ioStyle};
+    },
+    props: {
+      ioSize: {
+        type: Number,
+        default: 10
+      },
+      ioValue: null,
+      ioStyle: null,
+      value: null,
+      name: {
+        type: String,
+        default: 'ioRadio'
+      },
+      ioBorder: {
+        type: Number,
+        default: 3,
+      },
+      ioBorderColor: {
+        type: String,
+        default: "#49B8E1"
+      },
+      ioCheckColor: {
+        tyle: String,
+        default: "#00CF00"
       }
     },
-    props: ['ioValue', 'value', 'ioStyle', 'name'],
     methods: {
       click: function () {
         this.radioValue = this.ioValue;
