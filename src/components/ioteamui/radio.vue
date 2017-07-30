@@ -24,7 +24,7 @@
     watch: {
       value: {
         handler: function () {
-          this.value != this.ioValue ? this.radioValue = '' : this.radioValue = this.value
+          this.radioValue = this.value != this.ioValue ? "" : this.value
         },
         deep: true
       }
@@ -65,7 +65,6 @@
         default: 10
       },
       ioValue: null,
-      ioStyle: null,
       value: null,
       name: {
         type: String,

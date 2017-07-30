@@ -5,6 +5,7 @@
   export default{
     data: function () {
       return {
+        inputValue: '',
         isfocus: false,
         focusStyle: {
           'box-shadow': '2px 2px 2px 2px #888888'
@@ -22,13 +23,18 @@
           width: '130px',
           'border-radius': '2px'
         },
-        inputValue: ''
       }
     },
     watch: {
       inputValue: {
         handler: function () {
           this.$emit('input', this.inputValue);
+        },
+        deep: true
+      },
+      value: {
+        handler: function () {
+          this.inputValue = this.value;
         },
         deep: true
       }
@@ -38,10 +44,10 @@
         return this.isfocus ?
           lodash.extend(JSON.parse(JSON.stringify(this.defaultStyle)), JSON.parse(JSON.stringify(this.focusStyle)))
           : JSON.parse(JSON.stringify(this.defaultStyle))
-      }
+      },
     },
     mounted(){
-      this.inputValue = this.value ? this.value : '';
+      this.inputValue = this.value ? '' : this.value;
       this.defaultStyle = lodash.extend({},
         JSON.parse(JSON.stringify(this.defaultStyle)),
         JSON.parse(JSON.stringify(this.iostyle || {})));
