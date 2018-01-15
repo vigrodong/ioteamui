@@ -56,8 +56,8 @@
           color: 'white',
           "background-color": '#409EFF',
           "line-height": '28px',
-          "border-radius":"10px",
-          "font-size":"16px"
+          "border-radius": "10px",
+          "font-size": "16px"
         }
       }
     },
@@ -99,28 +99,27 @@
             color: "white",
             "background-color": '#409EFF',
             "line-height": '28px',
-            "border-radius":"10px",
-            "font-size":"16px"
+            "border-radius": "10px",
+            "font-size": "16px"
           }
         }
       }
     },
     computed: {
       buttonStyle(){
-        console.log(this.uniStyle);
         return {
           width: this.uniStyle.width,
           height: this.uniStyle.height,
           "background-color": this.uniStyle['background-color'],
-          "color":this.uniStyle.color,
-          "border-radius":this.uniStyle['border-radius'],
+          "color": this.uniStyle.color,
+          "border-radius": this.uniStyle['border-radius'],
 
         }
       },
       fontStyle(){
         return {
           "line-height": this.uniStyle['line-height'],
-          "font-size":this.uniStyle['font-size']
+          "font-size": this.uniStyle['font-size']
         }
       },
       uniStyle(){
@@ -133,11 +132,11 @@
         this.beforeUpload(this.files, this.upload);
       },
       upload: function(data) {
-        ajax({ url: this.pathTo, method: "POST", data: data }).then(function(value) {
-          this.success(value, this.files, this.fileList)
-        }).catch(function(value) {
-          this.error(value, this.file, this.fileList)
-        })
+          ajax({ url: this.pathTo, method: "POST", data: data }).then(function(value) {
+            this.success(value, this.files, this.fileList)
+          }).catch(function(value) {
+            this.error(value, this.file, this.fileList)
+          })
       }
     }
   }
@@ -158,6 +157,7 @@
     top: 0;
     left: 0;
   }
+
   .font-style {
     width: 100%;
     height: 100%;
